@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { getTrendingVideosURL, getVideoSearchURL } from "../config/api";
 import styles from "./Page.module.css";
+import ShimmerCard from "../Components/ShimmerCard";
 
 const Home = () => {
   const [videos, setVideos] = useState([]);
@@ -50,7 +51,9 @@ const Home = () => {
   if (loading) {
     return (
       <div className={styles.page}>
-        <div className={styles.loading}>Loading videos...</div>
+        <div className={styles.loading}>
+          <ShimmerCard />
+        </div>
       </div>
     );
   }
