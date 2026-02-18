@@ -8,6 +8,7 @@ import Home from './Pages/Home'
 import Profile from './Pages/Profile'
 import Watch from './Pages/Watch'
 import Upload from './Pages/Upload'
+import Search from './Pages/Search'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/watch" element={<Watch />} />
         <Route path="/upload" element={<Upload />} />
+        <Route path="/search" element={<Search />} />
       </Routes>
     </Layout>
   )
