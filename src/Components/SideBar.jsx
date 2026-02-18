@@ -7,10 +7,11 @@ const SideBar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const menuItems = [
-    { icon: "🏠", label: "Home", path: "/" },
-    { icon: "🔥", label: "Trending", path: "/?category=trending" },
-    { icon: "⬆️", label: "Upload", path: "/upload" },
-    { icon: "👤", label: "Profile", path: "/profile" },
+    { label: "Home", path: "/" },
+    { label: "Trending", path: "/" },
+    { label: "Watch History", path: "/watch-history" },
+    { label: "Upload", path: "/upload" },
+    { label: "Profile", path: "/profile" },
   ];
 
   return (
@@ -34,7 +35,6 @@ const SideBar = () => {
             onClick={() => navigate(item.path)}
             title={item.label}
           >
-            <span className={styles.icon}>{item.icon}</span>
             {!isCollapsed && <span className={styles.label}>{item.label}</span>}
           </button>
         ))}

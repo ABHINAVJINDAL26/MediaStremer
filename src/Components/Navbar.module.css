@@ -3,8 +3,9 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 20px;
-  background-color: #1f1f1f;
-  border-bottom: 1px solid #303030;
+  background: rgba(12, 14, 18, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -20,6 +21,7 @@
   color: #fff;
   font-size: 20px;
   font-weight: 600;
+  letter-spacing: 0.3px;
 }
 
 .searchContainer {
@@ -27,14 +29,15 @@
   max-width: 500px;
   display: flex;
   gap: 8px;
+  position: relative;
 }
 
 .searchInput {
   flex: 1;
   padding: 10px 15px;
-  border: 1px solid #404040;
-  border-radius: 20px;
-  background-color: #262626;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
   color: #fff;
   font-size: 14px;
   outline: none;
@@ -42,8 +45,9 @@
 }
 
 .searchInput:focus {
-  background-color: #353535;
-  border-color: #600;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(204, 0, 0, 0.6);
+  box-shadow: 0 0 0 3px rgba(204, 0, 0, 0.2);
 }
 
 .searchInput::placeholder {
@@ -52,18 +56,19 @@
 
 .searchBtn {
   padding: 10px 20px;
-  background-color: #cc0000;
+  background: linear-gradient(135deg, #cc0000 0%, #e00000 100%);
   color: white;
   border: none;
-  border-radius: 20px;
+  border-radius: 999px;
   cursor: pointer;
   font-size: 14px;
   font-weight: 500;
-  transition: background-color 0.3s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .searchBtn:hover {
-  background-color: #aa0000;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(204, 0, 0, 0.35);
 }
 
 .userMenu {
@@ -75,26 +80,27 @@
 .uploadBtn,
 .profileBtn {
   padding: 8px 16px;
-  background-color: transparent;
+  background-color: rgba(255, 255, 255, 0.02);
   color: #fff;
-  border: 1px solid #303030;
-  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
   cursor: pointer;
   font-size: 14px;
   transition: all 0.3s ease;
 }
 
 .uploadBtn {
-  background-color: #cc0000;
-  border-color: #cc0000;
+  background: linear-gradient(135deg, #cc0000 0%, #e00000 100%);
+  border-color: transparent;
 }
 
 .uploadBtn:hover {
-  background-color: #aa0000;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(204, 0, 0, 0.35);
 }
 
 .profileBtn:hover {
-  background-color: #303030;
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
 @media (max-width: 768px) {

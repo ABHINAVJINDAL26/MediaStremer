@@ -19,7 +19,32 @@ const Watch = () => {
         const url = getVideoDetailsURL(videoId);
         const response = await fetch(url);
         const data = await response.json();
-        setVideoDetails(data.items[0]);
+        const video = data.items[0];
+        setVideoDetails(video);
+        
+        // Save to watch history
+        if (video) {
+          const history = JSON.parse(localStorage.getItem("watchHistory") || "[]");
+          
+          // Check if video already exists
+          const existingIndex = history.findIndex(item => item.videoId === videoId);
+          if (existingIndex > -1) {
+            history.splice(existingIndex, 1);
+          }
+          
+          // Add to beginning
+          const newEntry = {
+            videoId: videoId,
+            title: video.snippet.title,
+            thumbnail: video.snippet.thumbnails.medium.url,
+            channelName: video.snippet.channelTitle,
+            timestamp: new Date().toISOString()
+          };
+          
+          history.unshift(newEntry);
+          const limitedHistory = history.slice(0, 50);
+          localStorage.setItem("watchHistory", JSON.stringify(limitedHistory));
+        }
       } catch (error) {
         console.error("Error fetching video details:", error);
       } finally {

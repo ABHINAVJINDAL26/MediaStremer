@@ -3,7 +3,7 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #0f0f0f;
+  background-color: #0b0d10;
 }
 
 .mainContent {
@@ -15,7 +15,7 @@
 .contentArea {
   flex: 1;
   overflow-y: auto;
-  background-color: #0f0f0f;
+  background-color: transparent;
 }
 
 .contentArea::-webkit-scrollbar {
@@ -23,14 +23,14 @@
 }
 
 .contentArea::-webkit-scrollbar-track {
-  background: #0f0f0f;
+  background: #0b0d10;
 }
 
 .contentArea::-webkit-scrollbar-thumb {
-  background: #414141;
+  background: #2a2f3a;
   border-radius: 4px;
 }
 
 .contentArea::-webkit-scrollbar-thumb:hover {
-  background: #626262;
+  background: #3a4150;
 }

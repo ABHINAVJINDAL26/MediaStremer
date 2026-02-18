@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getVideoSearchURL } from "../config/api";
 
-const useRelatedVideo = (videoId, searchTerm = "") => {
+const useRelatedVideo = (videoId, searchTerm = "", limit = 10) => {
   const [relatedVideos, setRelatedVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -18,7 +18,7 @@ const useRelatedVideo = (videoId, searchTerm = "") => {
         setError(null);
 
         // Fetch related videos based on video title or search term
-        const url = getVideoSearchURL(searchTerm, 10);
+        const url = getVideoSearchURL(searchTerm, limit);
         const response = await fetch(url);
 
         if (!response.ok) {
@@ -43,7 +43,7 @@ const useRelatedVideo = (videoId, searchTerm = "") => {
     };
 
     fetchRelatedVideos();
-  }, [videoId, searchTerm]);
+  }, [videoId, searchTerm, limit]);
 
   return { relatedVideos, loading, error };
 };

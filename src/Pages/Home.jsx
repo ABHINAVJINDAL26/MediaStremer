@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
-import { getTrendingVideosURL, getVideoSearchURL } from "../config/api";
+import { useNavigate } from "react-router-dom";
+import { getTrendingVideosURL } from "../config/api";
 import styles from "./Page.module.css";
 import ShimmerCard from "../Components/ShimmerCard";
+import HomeScroll from "./HomeScroll";
 
 const Home = () => {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,14 +17,7 @@ const Home = () => {
         setLoading(true);
         setError(null);
 
-        const searchQuery = searchParams.get("search");
-        let url;
-
-        if (searchQuery) {
-          url = getVideoSearchURL(searchQuery, 20);
-        } else {
-          url = getTrendingVideosURL(20);
-        }
+        const url = getTrendingVideosURL(20);
 
         const response = await fetch(url);
         if (!response.ok) {
@@ -42,7 +35,7 @@ const Home = () => {
     };
 
     fetchVideos();
-  }, [searchParams]);
+  }, []);
 
   const handleVideoClick = (videoId) => {
     navigate(`/watch?v=${videoId}`);
@@ -68,9 +61,7 @@ const Home = () => {
 
   return (
     <div className={styles.page}>
-      <h2 className={styles.title}>
-        {searchParams.get("search") ? "Search Results" : "Trending Videos"}
-      </h2>
+      <h2 className={styles.title}>Trending Videos</h2>
       <div className={styles.videosGrid}>
         {videos.map((video) => {
           const videoId =
@@ -99,6 +90,7 @@ const Home = () => {
           );
         })}
       </div>
+      <HomeScroll title="Fresh Picks" searchTerm="latest" limit={12} />
     </div>
   );
 };
