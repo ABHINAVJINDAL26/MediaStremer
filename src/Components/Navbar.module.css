@@ -24,19 +24,31 @@
   letter-spacing: 0.3px;
 }
 
+.logoText {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logoIcon {
+  color: #ff2b2b;
+}
+
 .searchContainer {
   flex: 1;
   max-width: 500px;
   display: flex;
-  gap: 8px;
+  gap: 0;
   position: relative;
+  align-items: center;
 }
 
 .searchInput {
   flex: 1;
-  padding: 10px 15px;
+  padding: 11px 16px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 999px;
+  border-right: none;
+  border-radius: 999px 0 0 999px;
   background: rgba(255, 255, 255, 0.04);
   color: #fff;
   font-size: 14px;
@@ -55,20 +67,175 @@
 }
 
 .searchBtn {
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #cc0000 0%, #e00000 100%);
+  padding: 10px 16px;
+  background: #1f1f1f;
   color: white;
-  border: none;
-  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: none;
+  border-radius: 0 999px 999px 0;
   cursor: pointer;
   font-size: 14px;
   font-weight: 500;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .searchBtn:hover {
+  background: #2a2a2a;
+}
+
+.micBtn {
+  padding: 10px;
+  margin-left: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.suggestions {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  right: 0;
+  background: #1a1d22;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  z-index: 60;
+}
+
+.suggestionsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.suggestionsTitle {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #9aa0a6;
+}
+
+.clearAll {
+  font-size: 11px;
+  color: #ff8b8b;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.clearAll:hover {
+  color: #ffb4b4;
+}
+
+.emptyState {
+  padding: 14px;
+  font-size: 13px;
+  color: #8d8d8d;
+}
+
+.suggestionsList {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.suggestionItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.suggestionItem:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.suggestionLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1;
+}
+
+.suggestionIcon {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9aa0a6;
+}
+
+.suggestionSvg {
+  width: 14px;
+  height: 14px;
+}
+
+.suggestionText {
+  min-width: 0;
+}
+
+.suggestionQuery {
+  display: block;
+  font-size: 13px;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.suggestionTime {
+  display: block;
+  font-size: 11px;
+  color: #7f8790;
+}
+
+.removeBtn {
+  background: transparent;
+  border: none;
+  color: #8b8b8b;
+  opacity: 0;
+  transition: color 0.2s ease, opacity 0.2s ease;
+  padding: 6px;
+  border-radius: 6px;
+}
+
+.suggestionItem:hover .removeBtn {
+  opacity: 1;
+}
+
+.removeBtn:hover {
+  color: #ff7a7a;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.removeSvg {
+  width: 14px;
+  height: 14px;
+}
+
+.micBtn:hover {
+  background: rgba(255, 255, 255, 0.12);
   transform: translateY(-1px);
-  box-shadow: 0 8px 18px rgba(204, 0, 0, 0.35);
 }
 
 .userMenu {
@@ -87,6 +254,9 @@
   cursor: pointer;
   font-size: 14px;
   transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .uploadBtn {

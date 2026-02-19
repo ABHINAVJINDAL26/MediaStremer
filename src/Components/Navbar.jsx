@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { Search, Mic, Upload, User, Youtube } from "lucide-react";
 import styles from "./Navbar.module.css";
 
 function Navbar() {
@@ -88,7 +89,10 @@ function Navbar() {
   return (
     <div className={styles.navbar}>
       <div className={styles.logo}>
-        <h1>YtClone</h1>
+        <h1 className={styles.logoText}>
+          <Youtube size={20} className={styles.logoIcon} />
+          Watchly
+        </h1>
       </div>
 
       <form className={styles.searchContainer} onSubmit={handleSearch} ref={searchRef}>
@@ -100,45 +104,79 @@ function Navbar() {
           onChange={(e) => setSearchQuery(e.target.value)}
           onFocus={handleInputFocus}
         />
-        <button type="submit" className={styles.searchBtn}>
-          🔍
+        <button type="submit" className={styles.searchBtn} aria-label="Search">
+          <Search size={18} />
+        </button>
+        <button type="button" className={styles.micBtn} aria-label="Voice search">
+          <Mic size={18} />
         </button>
         
-        {showSuggestions && filteredHistory.length > 0 && (
-          <div className="absolute top-full left-0 right-0 mt-1 bg-zinc-900 border border-zinc-800 rounded-lg shadow-lg overflow-hidden z-50">
-            {filteredHistory.map((item, index) => (
-              <div
-                key={index}
-                className="flex items-center justify-between px-4 py-3 hover:bg-zinc-800 cursor-pointer group"
-                onClick={() => handleSuggestionClick(item.query)}
-              >
-                <div className="flex items-center gap-3 flex-1">
-                  <svg className="w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span className="text-sm text-white">{item.query}</span>
-                </div>
+        {showSuggestions && (
+          <div className={styles.suggestions}>
+            <div className={styles.suggestionsHeader}>
+              <span className={styles.suggestionsTitle}>Recent searches</span>
+              {searchHistory.length > 0 && (
                 <button
-                  onClick={(e) => handleRemoveHistoryItem(e, index)}
-                  className="text-zinc-500 hover:text-red-500 opacity-0 group-hover:opacity-100 transition p-1"
-                  title="Remove"
+                  type="button"
+                  onClick={() => {
+                    localStorage.removeItem("searchHistory");
+                    setSearchHistory([]);
+                  }}
+                  className={styles.clearAll}
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
+                  Clear all
                 </button>
+              )}
+            </div>
+
+            {filteredHistory.length === 0 ? (
+              <div className={styles.emptyState}>No recent searches</div>
+            ) : (
+              <div className={styles.suggestionsList}>
+                {filteredHistory.map((item, index) => (
+                  <div
+                    key={index}
+                    className={styles.suggestionItem}
+                    onClick={() => handleSuggestionClick(item.query)}
+                  >
+                    <div className={styles.suggestionLeft}>
+                      <div className={styles.suggestionIcon}>
+                        <svg className={styles.suggestionSvg} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      </div>
+                      <div className={styles.suggestionText}>
+                        <span className={styles.suggestionQuery}>{item.query}</span>
+                        <span className={styles.suggestionTime}>
+                          {new Date(item.timestamp).toLocaleString()}
+                        </span>
+                      </div>
+                    </div>
+                    <button
+                      onClick={(e) => handleRemoveHistoryItem(e, index)}
+                      className={styles.removeBtn}
+                      title="Remove"
+                    >
+                      <svg className={styles.removeSvg} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
+                ))}
               </div>
-            ))}
+            )}
           </div>
         )}
       </form>
 
       <div className={styles.userMenu}>
         <button className={styles.uploadBtn} onClick={() => navigate("/upload")}>
-          ⬆️ Upload
+          <Upload size={16} />
+          Create
         </button>
         <button className={styles.profileBtn} onClick={() => navigate("/profile")}>
-          👤
+          <User size={16} />
+          Profile
         </button>
       </div>
     </div>
